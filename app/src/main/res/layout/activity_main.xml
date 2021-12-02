@@ -97,6 +97,6 @@
         android:layout_alignParentRight="true"
         android:background="#00FF0000"
         android:src="@drawable/tianjia"
-        android:layout_alignBottom="@id/list_view" />
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

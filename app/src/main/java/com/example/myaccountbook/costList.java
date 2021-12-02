@@ -15,9 +15,13 @@ public class costList {
         Money=money;
     }
 
-    public String getNote(){return Note;}
+    public String getNote(){
+        return Note;
+    }
 
-    public void setNote(String note){Note=note;}
+    public void setNote(String note){
+        Note=note;
+    }
 
     public String getDate() {
         return Date;
