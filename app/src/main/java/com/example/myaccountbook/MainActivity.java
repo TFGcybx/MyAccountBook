@@ -32,20 +32,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("Range")
     private void initData() {
         list=new ArrayList<>();
         SQLiteDatabase db=helper.getReadableDatabase();
         Cursor cursor=db.query("account",null,null,null,null,
                 null,null);
         while (cursor.moveToNext()){
-            costList clist=new costList();//构造实例
+            costList clist=new costList();
             clist.set_id(cursor.getString(cursor.getColumnIndex("_id")));
             clist.setTitle(cursor.getString(cursor.getColumnIndex("Title")));
+            clist.setNote(cursor.getString(cursor.getColumnIndex("Note")));
             clist.setDate(cursor.getString(cursor.getColumnIndex("Date")));
             clist.setMoney(cursor.getString(cursor.getColumnIndex("Money")));
             list.add(clist);
         }
-        //绑定适配器
+
         listView.setAdapter(new ListAdapter(this,list));
         db.close();
     }

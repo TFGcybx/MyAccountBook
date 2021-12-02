@@ -4,12 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#288CF0"
     tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jzc"
+        android:text="净资产"
+        android:textSize="30sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jzcz"
+        android:layout_below="@+id/jzc"
+        android:layout_centerHorizontal="true"
+        android:text="26545"
+        android:textSize="15sp"
+        android:textColor="#23F050"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jzcz"
+        android:id="@+id/shz"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/sr"
+            android:text="收入"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/zc"
+            android:text="支出"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shz"
+        android:id="@+id/shzz"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/srz"
+            android:text="803545"
+            android:textSize="15sp"
+            android:textColor="#23F050"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/zcz"
+            android:text="643248"
+            android:textSize="15sp"
+            android:textColor="#FF3C3C"
+            android:gravity="center"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="wrap_content"
-        android:layout_height="650dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shzz"/>
 
     <ImageButton
         android:id="@+id/add"
@@ -17,8 +94,9 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerInside"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
         android:background="#00FF0000"
         android:src="@drawable/tianjia"
-        android:layout_below="@+id/list_view"/>
+        android:layout_alignBottom="@id/list_view" />
+
 </RelativeLayout>

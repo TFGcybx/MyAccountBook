@@ -17,10 +17,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql="create table account(_id integer primary key autoincrement," +//主键
-                "Title varchar(20)," +//Title
-                "Date varchar(20)," +//Date
-                "Money vaechar(20))";//Money
+        String sql="CREATE TABLE account(_id integer PRIMARY KEY AUTOINCREMENT," +
+                "Title varchar(20)," +
+                "Note vaechar(20),"+
+                "Date varchar(20)," +
+                "Money vaechar(20))";
         db.execSQL(sql);
     }
 

@@ -39,10 +39,12 @@ public class ListAdapter extends BaseAdapter {
 
         costList item= mList.get(position);
         TextView tv_title=view.findViewById(R.id.tv_title);
+        TextView tv_note=view.findViewById(R.id.tv_note);
         TextView tv_date=view.findViewById(R.id.tv_date);
         TextView tv_money=view.findViewById(R.id.tv_money);
 
         tv_title.setText(mList.get(position).getTitle());
+        tv_note.setText(mList.get(position).getNote());
         tv_date.setText(mList.get(position).getDate());
         tv_money.setText(mList.get(position).getMoney());
         return view;

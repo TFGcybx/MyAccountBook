@@ -15,8 +15,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:hint="Cost Title"
-        android:textColor="#ffbd27"
-        />
+        android:textColor="#ffbd27" />
+
+    <EditText
+        android:id="@+id/et_cost_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:hint="Cost Note"
+        android:textColor="#ffbd27"/>
 
     <EditText
         android:id="@+id/et_cost_money"
@@ -25,8 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:hint="Cost Money"
-        android:textColor="#ffbd27"
-        />
+        android:textColor="#ffbd27" />
 
     <DatePicker
         android:id="@+id/dp_cost_date"
@@ -34,8 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:datePickerMode="spinner"
-        android:calendarViewShown="false"
-        />
+        android:calendarViewShown="false" />
 
     <Button
         android:onClick="okButton"
@@ -46,7 +51,6 @@
         android:textColor="#333333"
         android:background="#ffbd27"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        />
+        android:layout_marginRight="40dp" />
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.myaccountbook;
 public class costList {
     private String _id;
     private String Title;
+    private String Note;
     private String Date;
     private String Money;
 
@@ -13,6 +14,10 @@ public class costList {
     public void setMoney(String money){
         Money=money;
     }
+
+    public String getNote(){return Note;}
+
+    public void setNote(String note){Note=note;}
 
     public String getDate() {
         return Date;
