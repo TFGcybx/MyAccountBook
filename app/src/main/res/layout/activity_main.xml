@@ -4,89 +4,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#288CF0"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/jzc"
-        android:text="净资产"
-        android:textSize="30sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/jzcz"
-        android:layout_below="@+id/jzc"
-        android:layout_centerHorizontal="true"
-        android:text="26545"
-        android:textSize="15sp"
-        android:textColor="#23F050"/>
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/jzcz"
-        android:id="@+id/shz"
-        android:orientation="horizontal">
+        android:id="@+id/hzxx"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/sr"
-            android:text="收入"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"/>
+            android:background="#0A64C8"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:id="@+id/User"
+                android:src="@drawable/yonghuxinxi"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3"
+                android:id="@+id/appName"
+                android:text="MyAccountBook"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:id="@+id/backTop"
+                android:text="返回顶部"
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/zc"
-            android:text="支出"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"/>
+
+            android:background="#288CF0"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/jzc"
+                android:text="净资产"
+                android:textSize="30sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/jzcz"
+                android:gravity="center"
+                android:text="26545"
+                android:textSize="15sp"
+                android:textColor="#23F050"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shz"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/sr"
+                    android:text="收入"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/zc"
+                    android:text="支出"
+                    android:textSize="20sp"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/shzz"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/srz"
+                    android:text="803545"
+                    android:textSize="15sp"
+                    android:textColor="#23F050"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/zcz"
+                    android:text="643248"
+                    android:textSize="15sp"
+                    android:textColor="#FF3C3C"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/shz"
-        android:id="@+id/shzz"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/srz"
-            android:text="803545"
-            android:textSize="15sp"
-            android:textColor="#23F050"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/zcz"
-            android:text="643248"
-            android:textSize="15sp"
-            android:textColor="#FF3C3C"
-            android:gravity="center"/>
-    </LinearLayout>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/shzz"/>
+        android:layout_below="@+id/hzxx" />
 
     <ImageButton
         android:id="@+id/add"
