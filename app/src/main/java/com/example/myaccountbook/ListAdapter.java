@@ -1,22 +1,27 @@
 package com.example.myaccountbook;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter {
     List<costList>mList;
-
     public ListAdapter(List<costList>list)
     {
         mList=list;
     }
+    private DBHelper helper;
 
     @Override
     public int getCount(){
@@ -42,11 +47,13 @@ public class ListAdapter extends BaseAdapter {
         TextView tv_note=view.findViewById(R.id.tv_note);
         TextView tv_date=view.findViewById(R.id.tv_date);
         TextView tv_money=view.findViewById(R.id.tv_money);
+        ImageView ib_delete=view.findViewById(R.id.ib_delete);
 
         tv_title.setText(mList.get(position).getTitle());
         tv_note.setText(mList.get(position).getNote());
         tv_date.setText(mList.get(position).getDate());
         tv_money.setText(mList.get(position).getMoney());
+
         return view;
     }
 

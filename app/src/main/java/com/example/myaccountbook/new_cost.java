@@ -19,6 +19,7 @@ public class new_cost extends AppCompatActivity {
     private DBHelper helper;
     private EditText et_cost_title;
     private EditText et_cost_money;
+    private EditText et_cost_note;
     private DatePicker dp_cost_date;
 
     @Override
@@ -31,12 +32,14 @@ public class new_cost extends AppCompatActivity {
     private void initView(){
         helper=new DBHelper(new_cost.this);
         et_cost_title=findViewById(R.id.et_cost_title);
+        et_cost_note=findViewById(R.id.et_cost_note);
         et_cost_money=findViewById(R.id.et_cost_money);
         dp_cost_date=findViewById(R.id.dp_cost_date);
     }
 
     public void okButton(View view){
         String titleStr=et_cost_title.getText().toString().trim();
+        String noteStr=et_cost_note.getText().toString().trim();
         String moneyStr=et_cost_money.getText().toString().trim();
         String dateStr=dp_cost_date.getYear()+"-"+(dp_cost_date.getMonth())+"-"
                 +dp_cost_date.getDayOfMonth();
@@ -48,6 +51,7 @@ public class new_cost extends AppCompatActivity {
             SQLiteDatabase db=helper.getWritableDatabase();
             ContentValues values=new ContentValues();
             values.put("Title",titleStr);
+            values.put("Note",noteStr);
             values.put("Money",moneyStr);
             values.put("Date",dateStr);
             long account=db.insert("account",null,values);
