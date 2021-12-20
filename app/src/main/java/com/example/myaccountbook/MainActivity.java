@@ -13,6 +13,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView Delete;
     private TextView backtop;
     private List<costList>list;
-    private List<costList>rlist;
+    //private List<costList>rlist;
     private ListAdapter listAdapter;
     private int index = 0;
     @Override
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("Range")
     private void initData() {
         list=new ArrayList<>();
-        rlist=new ArrayList<>();
+        //rlist=new ArrayList<>();
         SQLiteDatabase db=helper.getReadableDatabase();
         Cursor cursor=db.query("account",null,null,null,null,
                 null,null);
@@ -66,13 +68,21 @@ public class MainActivity extends AppCompatActivity {
             clist.setNote(cursor.getString(cursor.getColumnIndex("Note")));
             clist.setDate(cursor.getString(cursor.getColumnIndex("Date")));
             clist.setMoney(cursor.getString(cursor.getColumnIndex("Money")));
-            rlist.removeAll(rlist);
             list.add(clist);
-            rlist.addAll(list);
-            Collections.reverse(rlist);
+            Collections.sort(list, new Comparator<costList>() {
+                @Override
+                public int compare(costList o1, costList o2) {
+                    int id1=Integer.parseInt(o1.get_id());
+                    int id2=Integer.parseInt(o2.get_id());
+                    if(id1<id2){
+                        return 1;
+                    }
+                    return -1;
+                }
+            });
         }
 
-        listView.setAdapter(new ListAdapter(this,rlist));
+        listView.setAdapter(new ListAdapter(this,list));
         db.close();
     }
 
@@ -99,12 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 view.findViewById(R.id.ib_delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int rposition=rlist.size()+1-position;
+                        int rposition=list.size()-position-1;
                         String ret2=DeleteContentSQL(rposition);
                         if(ret2.equals("1")){
                             Toast.makeText(MainActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
-                            rlist.remove(position);
-                            listAdapter.notifyDataSetChanged();
+                            initData();
                         } else {
                             Toast.makeText(MainActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
                         }
