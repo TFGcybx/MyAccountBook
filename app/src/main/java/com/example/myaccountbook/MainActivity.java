@@ -106,7 +106,14 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.findViewById(R.id.ib_delete).setOnClickListener(new View.OnClickListener() {
+                view.findViewById(R.id.iv_up).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int rposition=list.size()-position-1;
+                        passdata(rposition);
+                    }
+                });
+                view.findViewById(R.id.iv_delete).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         int rposition=list.size()-position-1;
@@ -126,6 +133,29 @@ public class MainActivity extends AppCompatActivity {
     public void addAccount(View view){
         Intent intent=new Intent(MainActivity.this,new_cost.class);
         startActivityForResult(intent,1);
+    }
+
+    @SuppressLint("Range")
+    public void passdata(int i){
+        SQLiteDatabase db=helper.getReadableDatabase();
+        Cursor cursor=db.query("account",null,null,
+                null,null,null,null);
+        if(cursor.moveToPosition(i)){
+            String OID=cursor.getString(cursor.getColumnIndex("_id"));
+            String OTitle=cursor.getString(cursor.getColumnIndex("Title"));
+            String ONote=cursor.getString(cursor.getColumnIndex("Note"));
+            String ODate=cursor.getString(cursor.getColumnIndex("Date"));
+            String OMoney=cursor.getString(cursor.getColumnIndex("Money"));
+            Intent intent=new Intent(MainActivity.this,up_cost.class);
+            intent.putExtra("OID",OID);
+            intent.putExtra("OTitle",OTitle);
+            intent.putExtra("ONote",ONote);
+            intent.putExtra("ODate",ODate);
+            intent.putExtra("OMoney",OMoney);
+            //startActivity(intent);
+            startActivityForResult(intent,1);
+        }
+
     }
 
     public String DeleteContentSQL(int i){
