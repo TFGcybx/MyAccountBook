@@ -28,7 +28,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1px"
+                android:layout_height="2px"
                 android:background="?android:attr/listDivider"
                 />
 
@@ -62,27 +62,6 @@
             android:gravity="center"
             android:textSize="15sp"
             android:text="25" />
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/iv_up"
-            android:src="@drawable/xiugai"
-            android:background="#00FF0000"
-            android:scaleType="centerInside"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/iv_delete"
-            android:src="@drawable/shanchu"
-            android:background="#00FF0000"
-            android:scaleType="centerInside"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"/>
-
     </LinearLayout>
 
 </RelativeLayout>

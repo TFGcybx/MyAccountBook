@@ -47,8 +47,6 @@ public class ListAdapter extends BaseAdapter {
         TextView tv_note=view.findViewById(R.id.tv_note);
         TextView tv_date=view.findViewById(R.id.tv_date);
         TextView tv_money=view.findViewById(R.id.tv_money);
-        ImageView iv_delete=view.findViewById(R.id.iv_delete);
-        ImageView iv_up=view.findViewById(R.id.iv_up);
 
         tv_title.setText(mList.get(position).getTitle());
         tv_note.setText(mList.get(position).getNote());

@@ -11,11 +11,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +26,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +42,15 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper helper;
     private ListView listView;
     private ImageButton Add;
-    private ImageView Delete;
     private TextView backtop;
     private List<costList>list;
-    //private List<costList>rlist;
     private ListAdapter listAdapter;
-    private int index = 0;
+    private int NetAsset;
+    private TextView jzcz;
+    private int Income;
+    private TextView srz;
+    private int expend;
+    private TextView zcz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +63,12 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("Range")
     private void initData() {
         list=new ArrayList<>();
-        //rlist=new ArrayList<>();
         SQLiteDatabase db=helper.getReadableDatabase();
         Cursor cursor=db.query("account",null,null,null,null,
                 null,null);
+        NetAsset=0;
+        Income=0;
+        expend=0;
         while (cursor.moveToNext()){
             costList clist=new costList();
             clist.set_id(cursor.getString(cursor.getColumnIndex("_id")));
@@ -80,6 +88,23 @@ public class MainActivity extends AppCompatActivity {
                     return -1;
                 }
             });
+            NetAsset+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+            if(Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")))>0){
+                Income+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+            }else {
+                expend+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+            }
+            jzcz=findViewById(R.id.jzcz);
+            jzcz.setText(Integer.toString(NetAsset));
+            if(NetAsset<0){
+                jzcz.setTextColor(Color.parseColor("#FF3C3C"));
+            }else {
+                jzcz.setTextColor(Color.parseColor("#23F050"));
+            }
+            srz.findViewById(R.id.srz);
+            srz.setText(Integer.toString(Income));
+            zcz.findViewById(R.id.zcz);
+            zcz.setText(Integer.toString(expend));
         }
 
         listView.setAdapter(new ListAdapter(this,list));
@@ -91,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
         this.registerForContextMenu(listView);
         Add = findViewById(R.id.add);
-
         backtop = findViewById(R.id.backTop);
         backtop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,26 +130,46 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                view.findViewById(R.id.iv_up).setOnClickListener(new View.OnClickListener() {
+                int rposition=list.size()-position-1;
+                passdataTodetails(rposition);
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                int rposition=list.size()-position-1;
+                PopupMenu popup=new PopupMenu(MainActivity.this,view);
+                MenuInflater inflater=popup.getMenuInflater();
+                inflater.inflate(R.menu.main,popup.getMenu());
+                popup.show();
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        int rposition=list.size()-position-1;
-                        passdata(rposition);
-                    }
-                });
-                view.findViewById(R.id.iv_delete).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int rposition=list.size()-position-1;
-                        String ret2=DeleteContentSQL(rposition);
-                        if(ret2.equals("1")){
-                            Toast.makeText(MainActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
-                            initData();
-                        } else {
-                            Toast.makeText(MainActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.delete:
+                                String ret2=DeleteContentSQL(rposition);
+                                if(ret2.equals("1")){
+                                    Toast.makeText(MainActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                                    initData();
+                                } else {
+                                    Toast.makeText(MainActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case R.id.details:
+                                passdataTodetails(rposition);
+                                break;
+                            case R.id.alter:
+                                passdataToalter(rposition);
+                                break;
+                            case R.id.refresh:
+                                break;
+                            default:
+                                break;
                         }
+                        return false;
                     }
                 });
+                return true;
             }
         });
     }
@@ -136,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("Range")
-    public void passdata(int i){
+    public void passdataToalter(int i){
         SQLiteDatabase db=helper.getReadableDatabase();
         Cursor cursor=db.query("account",null,null,
                 null,null,null,null);
@@ -152,10 +196,30 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("ONote",ONote);
             intent.putExtra("ODate",ODate);
             intent.putExtra("OMoney",OMoney);
-            //startActivity(intent);
             startActivityForResult(intent,1);
         }
 
+    }
+
+    @SuppressLint("Range")
+    public void passdataTodetails(int i){
+        SQLiteDatabase db=helper.getReadableDatabase();
+        Cursor cursor=db.query("account",null,null,
+                null,null,null,null);
+        if(cursor.moveToPosition(i)){
+            String OID=cursor.getString(cursor.getColumnIndex("_id"));
+            String OTitle=cursor.getString(cursor.getColumnIndex("Title"));
+            String ONote=cursor.getString(cursor.getColumnIndex("Note"));
+            String ODate=cursor.getString(cursor.getColumnIndex("Date"));
+            String OMoney=cursor.getString(cursor.getColumnIndex("Money"));
+            Intent intent=new Intent(MainActivity.this,details.class);
+            intent.putExtra("OID",OID);
+            intent.putExtra("OTitle",OTitle);
+            intent.putExtra("ONote",ONote);
+            intent.putExtra("ODate",ODate);
+            intent.putExtra("OMoney",OMoney);
+            startActivityForResult(intent,1);
+        }
     }
 
     public String DeleteContentSQL(int i){
