@@ -45,19 +45,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView backtop;
     private List<costList>list;
     private ListAdapter listAdapter;
-    private int NetAsset;
-    private TextView jzcz;
-    private int Income;
-    private TextView srz;
-    private int expend;
-    private TextView zcz;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
         initData();
-
     }
 
     @SuppressLint("Range")
@@ -66,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db=helper.getReadableDatabase();
         Cursor cursor=db.query("account",null,null,null,null,
                 null,null);
-        NetAsset=0;
-        Income=0;
-        expend=0;
+        int netAsset = 0;
+        int earning=0;
+        int disburse=0;
         while (cursor.moveToNext()){
             costList clist=new costList();
             clist.set_id(cursor.getString(cursor.getColumnIndex("_id")));
@@ -88,23 +83,23 @@ public class MainActivity extends AppCompatActivity {
                     return -1;
                 }
             });
-            NetAsset+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+            netAsset +=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
             if(Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")))>0){
-                Income+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+                earning+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
             }else {
-                expend+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
+                disburse+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
             }
-            jzcz=findViewById(R.id.jzcz);
-            jzcz.setText(Integer.toString(NetAsset));
-            if(NetAsset<0){
+            TextView jzcz = findViewById(R.id.jzcz);
+            jzcz.setText(Integer.toString(netAsset));
+            if(netAsset <0){
                 jzcz.setTextColor(Color.parseColor("#FF3C3C"));
             }else {
                 jzcz.setTextColor(Color.parseColor("#23F050"));
             }
-            srz.findViewById(R.id.srz);
-            srz.setText(Integer.toString(Income));
-            zcz.findViewById(R.id.zcz);
-            zcz.setText(Integer.toString(expend));
+            TextView income=findViewById(R.id.income);
+            income.setText(Integer.toString(earning));
+            TextView expend=findViewById(R.id.expend);
+            expend.setText(Integer.toString(disburse));
         }
 
         listView.setAdapter(new ListAdapter(this,list));
@@ -213,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
             String ODate=cursor.getString(cursor.getColumnIndex("Date"));
             String OMoney=cursor.getString(cursor.getColumnIndex("Money"));
             Intent intent=new Intent(MainActivity.this,details.class);
+            intent.putExtra("i",Integer.toString(i));
             intent.putExtra("OID",OID);
             intent.putExtra("OTitle",OTitle);
             intent.putExtra("ONote",ONote);

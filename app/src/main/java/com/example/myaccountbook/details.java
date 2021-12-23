@@ -22,7 +22,8 @@ public class details extends AppCompatActivity {
     private String OTitle;
     private String ODate;
     private String ONote;
-    private int OID;
+    private String OID;
+    private int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class details extends AppCompatActivity {
         dtv_title.setText(intent.getStringExtra("OTitle"));
         dtv_date.setText(intent.getStringExtra("ODate"));
         dtv_note.setText(intent.getStringExtra("ONote"));
-        OID= Integer.parseInt(intent.getStringExtra("OID"));
+        OID= intent.getStringExtra("OID");
+        i=Integer.parseInt(intent.getStringExtra("i"));
     }
 
     public void backButton(View view){
@@ -56,7 +58,7 @@ public class details extends AppCompatActivity {
     }
 
     public void deleteAccount(View view){
-        DeleteContentSQL(OID);
+        DeleteContentSQL(i);
         setResult(1);
         finish();
     }
@@ -83,5 +85,6 @@ public class details extends AppCompatActivity {
         intent.putExtra("ODate",ODate);
         intent.putExtra("OMoney",OMoney);
         startActivity(intent);
+        finish();
     }
 }
