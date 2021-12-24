@@ -20,7 +20,7 @@
             android:background="#00ff0000"
             android:scaleType="centerInside"
             android:layout_gravity="center_vertical"
-            android:onClick="backButton"
+            android:onClick="dib_backButton"
             android:id="@+id/div_back"/>
 
         <TextView
@@ -73,6 +73,7 @@
             android:layout_weight="1"
             android:text="记账金额："
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center_vertical"/>
         <TextView
@@ -81,6 +82,7 @@
             android:layout_weight="2"
             android:gravity="right|center_vertical"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:id="@+id/dtv_money"/>
     </LinearLayout>
 
@@ -89,26 +91,36 @@
         android:layout_height="15dp"
         android:background="?android:attr/listDivider"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
+        android:layout_height="50dp">
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="账目分类："
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center_vertical"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@id/dtv_title"
+            android:scaleType="centerInside"
+            android:id="@+id/iv_title"
+            android:background="#FFFFFFFF"/>
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:layout_alignParentRight="true"
             android:gravity="right|center_vertical"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:id="@+id/dtv_title"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <View
@@ -125,6 +137,7 @@
             android:layout_weight="1"
             android:text="创建日期："
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center_vertical"/>
         <TextView
@@ -133,6 +146,7 @@
             android:layout_weight="2"
             android:gravity="right|center_vertical"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:id="@+id/dtv_date"/>
     </LinearLayout>
 
@@ -146,6 +160,7 @@
         android:layout_height="50dp"
         android:text="备注："
         android:textSize="25sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center_vertical"/>
 
@@ -153,6 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:gravity="center_vertical"
         android:id="@+id/dtv_note"/>
 

@@ -89,19 +89,18 @@ public class MainActivity extends AppCompatActivity {
             }else {
                 disburse+=Integer.parseInt(cursor.getString(cursor.getColumnIndex("Money")));
             }
-            TextView jzcz = findViewById(R.id.jzcz);
-            jzcz.setText(Integer.toString(netAsset));
-            if(netAsset <0){
-                jzcz.setTextColor(Color.parseColor("#FF3C3C"));
-            }else {
-                jzcz.setTextColor(Color.parseColor("#23F050"));
-            }
-            TextView income=findViewById(R.id.income);
-            income.setText(Integer.toString(earning));
-            TextView expend=findViewById(R.id.expend);
-            expend.setText(Integer.toString(disburse));
         }
-
+        TextView jzcz = findViewById(R.id.jzcz);
+        jzcz.setText(Integer.toString(netAsset));
+        if(netAsset <0){
+            jzcz.setTextColor(Color.parseColor("#FF3C3C"));
+        }else {
+            jzcz.setTextColor(Color.parseColor("#23F050"));
+        }
+        TextView income=findViewById(R.id.income);
+        income.setText(Integer.toString(earning));
+        TextView expend=findViewById(R.id.expend);
+        expend.setText(Integer.toString(disburse));
         listView.setAdapter(new ListAdapter(this,list));
         db.close();
     }
@@ -157,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                                 passdataToalter(rposition);
                                 break;
                             case R.id.refresh:
+                                initData();
                                 break;
                             default:
                                 break;

@@ -8,6 +8,14 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerInside"
+            android:id="@+id/iv_photo"
+            android:background="#FFFFFFFF"/>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -23,6 +31,7 @@
                 android:gravity="left"
                 android:singleLine="true"
                 android:textSize="25sp"
+                android:textColor="@color/black"
                 android:ellipsize="marquee"
                 android:text="CostTitle"/>
 
@@ -41,6 +50,7 @@
                 android:singleLine="true"
                 android:text="CostNote"
                 android:textSize="15sp"
+                android:textColor="@color/black"
                 android:ellipsize="marquee"
                 android:gravity="left"/>
         </LinearLayout>
@@ -52,6 +62,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:textSize="10sp"
+            android:textColor="@color/black"
             android:text="2021-11-22"/>
 
         <TextView
@@ -61,6 +72,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:text="25" />
     </LinearLayout>
 

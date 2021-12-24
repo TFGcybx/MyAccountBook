@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 public class new_cost extends AppCompatActivity {
     private DBHelper helper;
-    private EditText et_cost_title;
+    private TextView tv_cost_title;
     private EditText et_cost_money;
     private EditText et_cost_note;
     private DatePicker dp_cost_date;
@@ -31,14 +32,67 @@ public class new_cost extends AppCompatActivity {
 
     private void initView(){
         helper=new DBHelper(new_cost.this);
-        et_cost_title=findViewById(R.id.et_cost_title);
+        tv_cost_title=findViewById(R.id.tv_cost_title);
         et_cost_note=findViewById(R.id.et_cost_note);
         et_cost_money=findViewById(R.id.et_cost_money);
         dp_cost_date=findViewById(R.id.dp_cost_date);
     }
 
-    public void okButton(View view){
-        String titleStr=et_cost_title.getText().toString().trim();
+    public void chooseCost(View view){
+        switch (view.getId()){
+            case R.id.ib_default:
+                tv_cost_title.setText("其他");
+                break;
+            case R.id.ib_food:
+                tv_cost_title.setText("吃喝饮食");
+                break;
+            case R.id.ib_traffic:
+                tv_cost_title.setText("交通出行");
+                break;
+            case R.id.ib_phone:
+                tv_cost_title.setText("通信费用");
+                break;
+            case R.id.ib_debt:
+                tv_cost_title.setText("欠债借款");
+                break;
+            case R.id.ib_gift:
+                tv_cost_title.setText("人情礼物");
+                break;
+            case R.id.ib_house:
+                tv_cost_title.setText("房租水电");
+                break;
+            case R.id.ib_medical:
+                tv_cost_title.setText("医疗费用");
+                break;
+            case R.id.ib_redpacket:
+                tv_cost_title.setText("社交红包");
+                break;
+            case R.id.ib_shopping:
+                tv_cost_title.setText("逛街购物");
+                break;
+            case R.id.ib_sport:
+                tv_cost_title.setText("运动健身");
+                break;
+            case R.id.ib_wage:
+                tv_cost_title.setText("工资薪水");
+                break;
+            case R.id.ib_daily:
+                tv_cost_title.setText("日常用品");
+                break;
+            case R.id.ib_party:
+                tv_cost_title.setText("聚会聚餐");
+                break;
+            case R.id.ib_stock:
+                tv_cost_title.setText("基金理财");
+                break;
+            case R.id.ib_travel:
+                tv_cost_title.setText("旅游旅行");
+                break;
+        }
+    }
+
+    public void aib_okButton(View view){
+        String titleStr=tv_cost_title.getText().toString();
         String noteStr=et_cost_note.getText().toString().trim();
         String moneyStr=et_cost_money.getText().toString().trim();
         String dateStr=dp_cost_date.getYear()+"-"+(dp_cost_date.getMonth())+"-"
@@ -72,7 +126,7 @@ public class new_cost extends AppCompatActivity {
         }
     }
 
-    public void noButton(View view){
+    public void aib_backButton(View view){
         Toast toast=Toast.makeText(this,"已取消",Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
